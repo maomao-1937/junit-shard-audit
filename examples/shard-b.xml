@@ -1,0 +1,4 @@
+<testsuite name="Smoke">
+  <testcase classname="shop.Cart" name="subtotal"/>
+  <testcase classname="shop.Session" name="create"/>
+</testsuite>

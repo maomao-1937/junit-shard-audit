@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Checkout">
+    <testcase classname="shop.Cart" name="subtotal"/>
+    <testsuite name="Tax calculations">
+      <testcase classname="shop.Tax" name="regional_rate"/>
+      <testcase classname="shop.Tax" name="regional_rate">
+        <failure message="Different calculated rate"/>
+      </testcase>
+    </testsuite>
+    <testcase classname="shop.Cart" name="subtotal"><skipped/></testcase>
+  </testsuite>
+</testsuites>

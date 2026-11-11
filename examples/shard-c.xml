@@ -1,0 +1,3 @@
+<testsuite name="Receipts">
+  <testcase classname="shop.Receipt" name="create"/>
+</testsuite>

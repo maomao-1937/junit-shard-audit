@@ -1,0 +1,56 @@
+[
+  {
+    "name": "distinct identities across shards",
+    "args": ["junit_shard_audit.py", "examples/shard-b.xml", "examples/shard-c.xml"],
+    "exit": 0,
+    "report": {
+      "cases_per_shard": [2, 1],
+      "duplicate_group_count": 0,
+      "cross_shard_group_count": 0,
+      "excess_record_count": 0,
+      "duplicate_groups": []
+    }
+  },
+  {
+    "name": "within-shard and cross-shard duplicate groups",
+    "args": ["junit_shard_audit.py", "examples/shard-a.xml", "examples/shard-b.xml"],
+    "exit": 1,
+    "report": {
+      "cases_per_shard": [4, 2],
+      "duplicate_group_count": 2,
+      "cross_shard_group_count": 1,
+      "excess_record_count": 3,
+      "duplicate_groups": [
+        [{"shard": 1, "case": 1}, {"shard": 1, "case": 4}, {"shard": 2, "case": 1}],
+        [{"shard": 1, "case": 2}, {"shard": 1, "case": 3}]
+      ]
+    }
+  },
+  {
+    "name": "duplicate groups within one shard",
+    "args": ["junit_shard_audit.py", "examples/shard-a.xml"],
+    "exit": 1,
+    "report": {
+      "cases_per_shard": [4],
+      "duplicate_group_count": 2,
+      "cross_shard_group_count": 0,
+      "excess_record_count": 2,
+      "duplicate_groups": [
+        [{"shard": 1, "case": 1}, {"shard": 1, "case": 4}],
+        [{"shard": 1, "case": 2}, {"shard": 1, "case": 3}]
+      ]
+    }
+  },
+  {
+    "name": "missing identity in the second shard",
+    "args": ["junit_shard_audit.py", "examples/shard-b.xml", "examples/missing-identity.xml"],
+    "exit": 2,
+    "stderr": "error shard=2 case=1 invalid_identity\n"
+  },
+  {
+    "name": "DOCTYPE rejected",
+    "args": ["junit_shard_audit.py", "examples/with-doctype.xml"],
+    "exit": 2,
+    "stderr": "error shard=1 prohibited_declaration\n"
+  }
+]
